@@ -724,24 +724,119 @@ namespace GENUtility
             toWrite[index] = (byte)(value ? toWrite[index] | (LastBitOnByte >> (bitStartIndex % ByteSize)) : toWrite[index] & ~(LastBitOnByte >> (bitStartIndex % ByteSize)));
         }
 
-        /*
-        public static bool ReadBits(byte[] toRead, int startIndex, int bitStartIndex, int length, bool[] output, int outputStartIndex)
+
+        public static void ReadBits(byte[] toRead, int startIndex, int bitStartIndex, int length, bool[] output, int outputStartIndex)
         {
-            return ((LastBitOnByte >> bitStartIndex) & toRead[startIndex]) != 0;
+            int bitIndex = bitStartIndex % ByteSize;
+            startIndex += bitStartIndex / ByteSize;
+            for (int i = 0; i < length; i++, bitIndex++)
+            {
+                if (bitIndex >= ByteSize)
+                {
+                    bitIndex -= ByteSize;
+                    startIndex++;
+                }
+                output[i + outputStartIndex] = ((LastBitOnByte >> bitIndex) & toRead[startIndex]) != 0;
+            }
         }
-        public static bool ReadBits(byte[] toRead, int bitStartIndex, int length, bool[] output, int outputStartIndex)
+        public static void ReadBits(byte[] toRead, int bitStartIndex, int length, bool[] output, int outputStartIndex)
         {
-            return ((LastBitOnByte >> (bitStartIndex % ByteSize)) & toRead[bitStartIndex / ByteSize]) != 0;
+            int bitIndex = bitStartIndex % ByteSize;
+            int startIndex = bitStartIndex / ByteSize;
+            for (int i = 0; i < length; i++, bitIndex++)
+            {
+                if (bitIndex >= ByteSize)
+                {
+                    bitIndex -= ByteSize;
+                    startIndex++;
+                }
+                output[i + outputStartIndex] = ((LastBitOnByte >> bitIndex) & toRead[startIndex]) != 0;
+            }
         }
         public static void WriteBits(byte[] toWrite, int startIndex, int bitStartIndex, int length, bool[] input, int inputStartIndex)
         {
-            toWrite[startIndex] = (byte)(value ? toWrite[startIndex] | (LastBitOnByte >> bitStartIndex) : toWrite[startIndex] & ~(LastBitOnByte >> bitStartIndex));
+            int bitIndex = bitStartIndex % ByteSize;
+            startIndex += bitStartIndex / ByteSize;
+            for (int i = 0; i < length; i++, bitIndex++)
+            {
+                if (bitIndex >= ByteSize)
+                {
+                    bitIndex -= ByteSize;
+                    startIndex++;
+                }
+                toWrite[startIndex] = (byte)(input[i + inputStartIndex] ? toWrite[startIndex] | (LastBitOnByte >> bitIndex) : toWrite[startIndex] & ~(LastBitOnByte >> bitIndex));
+            }
         }
         public static void WriteBits(byte[] toWrite, int bitStartIndex, int length, bool[] input, int inputStartIndex)
         {
-            int index = bitStartIndex / ByteSize;
-            toWrite[index] = (byte)(value ? toWrite[index] | (LastBitOnByte >> (bitStartIndex % ByteSize)) : toWrite[index] & ~(LastBitOnByte >> (bitStartIndex % ByteSize)));
-        }*/
+            int bitIndex = bitStartIndex % ByteSize;
+            int startIndex = bitStartIndex / ByteSize;
+            for (int i = 0; i < length; i++, bitIndex++)
+            {
+                if (bitIndex >= ByteSize)
+                {
+                    bitIndex -= ByteSize;
+                    startIndex++;
+                }
+                toWrite[startIndex] = (byte)(input[i + inputStartIndex] ? toWrite[startIndex] | (LastBitOnByte >> bitIndex) : toWrite[startIndex] & ~(LastBitOnByte >> bitIndex));
+            }
+        }
+        public static void ReadBits(byte[] toRead, int startIndex, int bitStartIndex, int length, List<bool> output, int outputStartIndex)
+        {
+            int bitIndex = bitStartIndex % ByteSize;
+            startIndex += bitStartIndex / ByteSize;
+            for (int i = 0; i < length; i++, bitIndex++)
+            {
+                if (bitIndex >= ByteSize)
+                {
+                    bitIndex -= ByteSize;
+                    startIndex++;
+                }
+                output[i + outputStartIndex] = ((LastBitOnByte >> bitIndex) & toRead[startIndex]) != 0;
+            }
+        }
+        public static void ReadBits(byte[] toRead, int bitStartIndex, int length, List<bool> output, int outputStartIndex)
+        {
+            int bitIndex = bitStartIndex % ByteSize;
+            int startIndex = bitStartIndex / ByteSize;
+            for (int i = 0; i < length; i++, bitIndex++)
+            {
+                if (bitIndex >= ByteSize)
+                {
+                    bitIndex -= ByteSize;
+                    startIndex++;
+                }
+                output[i + outputStartIndex] = ((LastBitOnByte >> bitIndex) & toRead[startIndex]) != 0;
+            }
+        }
+        public static void WriteBits(byte[] toWrite, int startIndex, int bitStartIndex, int length, List<bool> input, int inputStartIndex)
+        {
+            int bitIndex = bitStartIndex % ByteSize;
+            startIndex += bitStartIndex / ByteSize;
+            for (int i = 0; i < length; i++, bitIndex++)
+            {
+                if (bitIndex >= ByteSize)
+                {
+                    bitIndex -= ByteSize;
+                    startIndex++;
+                }
+                toWrite[startIndex] = (byte)(input[i + inputStartIndex] ? toWrite[startIndex] | (LastBitOnByte >> bitIndex) : toWrite[startIndex] & ~(LastBitOnByte >> bitIndex));
+            }
+        }
+        public static void WriteBits(byte[] toWrite, int bitStartIndex, int length, List<bool> input, int inputStartIndex)
+        {
+            int bitIndex = bitStartIndex % ByteSize;
+            int startIndex = bitStartIndex / ByteSize;
+            for (int i = 0; i < length; i++, bitIndex++)
+            {
+                if (bitIndex >= ByteSize)
+                {
+                    bitIndex -= ByteSize;
+                    startIndex++;
+                }
+                toWrite[startIndex] = (byte)(input[i + inputStartIndex] ? toWrite[startIndex] | (LastBitOnByte >> bitIndex) : toWrite[startIndex] & ~(LastBitOnByte >> bitIndex));
+            }
+        }
 
 
         public static bool ReadBit(byte toRead, int bitStartIndex)
@@ -779,6 +874,167 @@ namespace GENUtility
             {
                 toWrite = (byte)(input[i + inputStartIndex] ? toWrite | (LastBitOnByte >> (bitStartIndex + i)) : toWrite & ~(LastBitOnByte >> (bitStartIndex + 1)));
             }
+        }
+
+        public static byte TranformFromBitsByte()
+        {
+            throw new NotImplementedException();
+        }
+        public static void TranformToBits(byte value)
+        {
+            throw new NotImplementedException();
+        }
+        public static byte TranformFromBitByte()
+        {
+            throw new NotImplementedException();
+        }
+        public static bool TranformToBit(byte value)
+        {
+            throw new NotImplementedException();
+        }
+        public static uint TranformFromBitsUInt32()
+        {
+            throw new NotImplementedException();
+        }
+        public static void TranformToBits(uint value)
+        {
+            throw new NotImplementedException();
+        }
+        public static uint TranformFromBitUInt32()
+        {
+            throw new NotImplementedException();
+        }
+        public static bool TranformToBit(uint value)
+        {
+            throw new NotImplementedException();
+        }
+        public static ushort TranformFromBitsUInt16()
+        {
+            throw new NotImplementedException();
+        }
+        public static void TranformToBits(ushort value)
+        {
+            throw new NotImplementedException();
+        }
+        public static ushort TranformFromBitUInt16()
+        {
+            throw new NotImplementedException();
+        }
+        public static bool TranformToBit(ushort value)
+        {
+            throw new NotImplementedException();
+        }
+        public static ulong TranformFromBitsUInt64()
+        {
+            throw new NotImplementedException();
+        }
+        public static void TranformToBits(ulong value)
+        {
+            throw new NotImplementedException();
+        }
+        public static ulong TranformFromBitUInt64()
+        {
+            throw new NotImplementedException();
+        }
+        public static bool TranformToBit(ulong value)
+        {
+            throw new NotImplementedException();
+        }
+        public static float TranformFromBitsSingle()
+        {
+            throw new NotImplementedException();
+        }
+        public static void TranformToBits(float value)
+        {
+            throw new NotImplementedException();
+        }
+        public static float TranformFromBitSingle()
+        {
+            throw new NotImplementedException();
+        }
+        public static bool TranformToBit(float value)
+        {
+            throw new NotImplementedException();
+        }
+        public static sbyte TranformFromBitsSByte()
+        {
+            throw new NotImplementedException();
+        }
+        public static void TranformToBits(sbyte value)
+        {
+            throw new NotImplementedException();
+        }
+        public static sbyte TranformFromBitSByte()
+        {
+            throw new NotImplementedException();
+        }
+        public static bool TranformToBit(sbyte value)
+        {
+            throw new NotImplementedException();
+        }
+        public static int TranformFromBitsInt32()
+        {
+            throw new NotImplementedException();
+        }
+        public static void TranformToBits(int value)
+        {
+            throw new NotImplementedException();
+        }
+        public static int TranformFromBitInt32()
+        {
+            throw new NotImplementedException();
+        }
+        public static bool TranformToBit(int value)
+        {
+            throw new NotImplementedException();
+        }
+        public static short TranformFromBitsInt16()
+        {
+            throw new NotImplementedException();
+        }
+        public static void TranformToBits(short value)
+        {
+            throw new NotImplementedException();
+        }
+        public static short TranformFromBitInt16()
+        {
+            throw new NotImplementedException();
+        }
+        public static bool TranformToBit(short value)
+        {
+            throw new NotImplementedException();
+        }
+        public static long TranformFromBitsInt64()
+        {
+            throw new NotImplementedException();
+        }
+        public static void TranformToBits(long value)
+        {
+            throw new NotImplementedException();
+        }
+        public static long TranformFromBitInt64()
+        {
+            throw new NotImplementedException();
+        }
+        public static bool TranformToBit(long value)
+        {
+            throw new NotImplementedException();
+        }
+        public static double TranformFromBitsDouble()
+        {
+            throw new NotImplementedException();
+        }
+        public static void TranformToBits(double value)
+        {
+            throw new NotImplementedException();
+        }
+        public static double TranformFromBitDouble()
+        {
+            throw new NotImplementedException();
+        }
+        public static bool TranformToBit(double value)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

@@ -1,9 +1,11 @@
 ﻿using System.Text;
+using System;
 namespace GENUtility
 {
     /// <summary>
     /// Class that manages a packet data. 
     /// </summary>
+    [Serializable]
     public class BytePacket
     {
         /// <summary>
