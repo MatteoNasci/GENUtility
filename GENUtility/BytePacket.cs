@@ -21,7 +21,7 @@ namespace GENUtility
         /// </summary>
         public int MaxCapacity { get { return Data.Length; } }
         /// <summary>
-        /// Internal buffer used by the packet Changes done to the buffer directly will not automatically modify the other variables
+        /// Internal buffer used by the packet. Changes done to the buffer directly will not automatically modify the other variables
         /// </summary>
         public byte[] Data;
 
@@ -29,15 +29,16 @@ namespace GENUtility
         /// Copies n elements from internal buffer of the given gamepacket starting from its seek position to the current instance. Elements copied are equal to the minimum between the packet to (copy current length - seek pos), the space effectively available starting from vopy seek pos and the space available in the current instance buffer.
         /// </summary>
         /// <param name="toCopy">gamepacket to copy from</param>
-        /// <param name="elementsCopied">effective number of elements copied successfully</param>
-        public void Copy(BytePacket toCopy, out int elementsCopied)
+        /// <returns>effective number of elements copied successfully</returns>
+        public int Copy(BytePacket toCopy)
         {
             int v1 = Data.Length - CurrentSeek;
             int v2 = toCopy.CurrentLength - toCopy.CurrentSeek;
             int v3 = toCopy.Data.Length - toCopy.CurrentSeek;
-            elementsCopied = v1 > v2 ? v2 : (v3 > v1 ? v1 : v3);
+            int elementsCopied = v1 > v2 ? v2 : (v3 > v1 ? v1 : v3);
 
             WriteByteData(toCopy, elementsCopied);
+            return elementsCopied;
         }
         /// <summary>
         /// Reads the internal buffer into the given array

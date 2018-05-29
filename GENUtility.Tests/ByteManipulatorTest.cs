@@ -229,109 +229,97 @@ public class ByteManipulatorTest
     [Test]
     public void TestWriteArrayByteToCycle()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteToCycle(first, 1, second, 0, 9, out n);
+        int n = ByteManipulator.WriteToCycle(first, 1, second, 0, 9);
         Assert.That(second[0], Is.EqualTo(1));
     }
     [Test]
     public void TestWriteArrayByteToCycleRedLight()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteToCycle(first, 0, second, 0, 9, out n);
+        int n = ByteManipulator.WriteToCycle(first, 0, second, 0, 9);
         Assert.That(second[0], Is.Not.EqualTo(1));
     }
     [Test]
     public void TestWriteArrayByteToCycle2()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteToCycle(first, 1, second, 8, 9, out n);
+        int n = ByteManipulator.WriteToCycle(first, 1, second, 8, 9);
         Assert.That(second[3], Is.EqualTo(6));
     }
     [Test]
     public void TestWriteArrayByteToCycleRedLight2()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteToCycle(first, 0, second, 8, 9, out n);
+        int n = ByteManipulator.WriteToCycle(first, 0, second, 8, 9);
         Assert.That(second[3], Is.Not.EqualTo(6));
     }
     [Test]
     public void TestWriteArrayByteToCycleNewOffset()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteToCycle(first, 1, second, 8, 9, out n);
+        int n = ByteManipulator.WriteToCycle(first, 1, second, 8, 9);
         Assert.That(n, Is.EqualTo(7));
     }
     [Test]
     public void TestWriteArrayByteToCycleNewOffsetRedLight()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteToCycle(first, 0, second, 8, 9, out n);
+        int n = ByteManipulator.WriteToCycle(first, 0, second, 8, 9);
         Assert.That(n, Is.Not.EqualTo(3));
     }
     [Test]
     public void TestWriteArrayByteFromCycle()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteFromCycle(first, 1, second, 0, 9, out n);
+        int n = ByteManipulator.WriteFromCycle(first, 1, second, 0, 9);
         Assert.That(second[0], Is.EqualTo(1));
     }
     [Test]
     public void TestWriteArrayByteFromCycleRedLight()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteFromCycle(first, 0, second, 0, 9, out n);
+        int n = ByteManipulator.WriteFromCycle(first, 0, second, 0, 9);
         Assert.That(second[0], Is.Not.EqualTo(1));
     }
     [Test]
     public void TestWriteArrayByteFromCycle2()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteFromCycle(first, 7, second, 0, 9, out n);
+        int n = ByteManipulator.WriteFromCycle(first, 7, second, 0, 9);
         Assert.That(second[3], Is.EqualTo(0));
     }
     [Test]
     public void TestWriteArrayByteFromCycleRedLight2()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteFromCycle(first, 6, second, 1, 9, out n);
+        int n = ByteManipulator.WriteFromCycle(first, 6, second, 1, 9);
         Assert.That(second[3], Is.Not.EqualTo(0));
     }
     [Test]
     public void TestWriteArrayByteFromCycleNewOffset()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteFromCycle(first, 7, second, 0, 9, out n);
+        int n = ByteManipulator.WriteFromCycle(first, 7, second, 0, 9);
         Assert.That(n, Is.EqualTo(6));
     }
     [Test]
     public void TestWriteArrayByteFromCycleNewOffsetRedLight()
     {
-        int n;
         byte[] first = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         byte[] second = new byte[10];
-        ByteManipulator.WriteFromCycle(first, 6, second, 1, 9, out n);
+        int n = ByteManipulator.WriteFromCycle(first, 6, second, 1, 9);
         Assert.That(n, Is.Not.EqualTo(6));
     }
     [Test]

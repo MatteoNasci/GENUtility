@@ -34,8 +34,8 @@ namespace GENUtility
         /// <param name="output">output array to write</param>
         /// <param name="outputStartIndex">output start index</param>
         /// <param name="count">amount of elements to write</param>
-        /// <param name="bufferNewOffset">new buffer start index</param>
-        public static void WriteFromCycle<T>(T[] cyclicBuffer, int bufferStartIndex, T[] output, int outputStartIndex, int count, out int bufferNewOffset)
+        /// <returns>new buffer start index</returns>
+        public static int WriteFromCycle<T>(T[] cyclicBuffer, int bufferStartIndex, T[] output, int outputStartIndex, int count)
         {
             int length = cyclicBuffer.Length;
             int firstPart = length - bufferStartIndex;
@@ -43,12 +43,12 @@ namespace GENUtility
             {
                 Array.Copy(cyclicBuffer, bufferStartIndex, output, outputStartIndex, firstPart);
                 Array.Copy(cyclicBuffer, 0, output, outputStartIndex + firstPart, count - firstPart);
-                bufferNewOffset = count - firstPart;
+                return count - firstPart;
             }
             else
             {
                 Array.Copy(cyclicBuffer, bufferStartIndex, output, outputStartIndex, count);
-                bufferNewOffset = bufferStartIndex + count;
+                return bufferStartIndex + count;
             }
         }
         /// <summary>
@@ -60,8 +60,8 @@ namespace GENUtility
         /// <param name="cyclicOutput">output array to write, it is considered a cyclic array</param>
         /// <param name="outputStartIndex">output start index</param>
         /// <param name="count">amount of elements to write</param>
-        /// <param name="outputNewOffset">new output start index</param>
-        public static void WriteToCycle<T>(T[] buffer, int bufferStartIndex, T[] cyclicOutput, int outputStartIndex, int count, out int outputNewOffset)
+        /// <returns>new output start index</returns>
+        public static int WriteToCycle<T>(T[] buffer, int bufferStartIndex, T[] cyclicOutput, int outputStartIndex, int count)
         {
             int length = cyclicOutput.Length;
             int firstPart = length - outputStartIndex;
@@ -69,12 +69,12 @@ namespace GENUtility
             {
                 Array.Copy(buffer, bufferStartIndex, cyclicOutput, outputStartIndex, firstPart);
                 Array.Copy(buffer, bufferStartIndex + firstPart, cyclicOutput, 0, count - firstPart);
-                outputNewOffset = count - firstPart;
+                return count - firstPart;
             }
             else
             {
                 Array.Copy(buffer, bufferStartIndex, cyclicOutput, outputStartIndex, count);
-                outputNewOffset = outputStartIndex + count;
+                return outputStartIndex + count;
             }
         }
         /// <summary>
